@@ -6,11 +6,13 @@
 //
 
 import Testing
+@testable import Pokedex_SwiftUI
 
 struct Pokedex_SwiftUITests {
 
-    @Test func example() async throws {
-        // Write your test here and use APIs like `#expect(...)` to check expected conditions.
+    @Test func startswithMockedPokemon() {
+        let viewModel = PokemonListViewModel()
+        
+        #expect(viewModel.pokemon.count == 4)
     }
-
 }

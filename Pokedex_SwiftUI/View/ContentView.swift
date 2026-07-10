@@ -13,7 +13,11 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List(viewModel.pokemon) { pokemon in
-                Text(pokemon.name)
+                NavigationLink {
+                    PokemonDetailView(pokemon: pokemon)
+                } label: {
+                    Text(pokemon.name)
+                }
             }
             .navigationTitle("Pokedex")
         }

@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var viewModel = PokemonListViewModel()
+    
     var body: some View {
-        VStack {
-            Text("Pokedex").font(.title)
+        NavigationStack {
+            List(viewModel.pokemon) { pokemon in
+                Text(pokemon.name)
+            }
+            .navigationTitle("Pokedex")
         }
-        .padding()
     }
 }
 

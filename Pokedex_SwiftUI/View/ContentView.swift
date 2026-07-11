@@ -12,14 +12,24 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            List(viewModel.pokemon) { pokemon in
-                NavigationLink {
-                    PokemonDetailView(pokemon: pokemon)
-                } label: {
-                    Text(pokemon.name)
+            Group {
+                if viewModel.isLoading {
+                    ProgressView("Loading Pokemon..")
+                } else if let errorMessage = viewModel.errorMessage {
+                    Text(errorMessage)
+                        .foregroundStyle(.red)
+                } else {
+                    List(viewModel.pokemon) { pokemon in
+                        NavigationLink {
+                            PokemonDetailView(pokemon: pokemon)
+                        } label: {
+                            Text(pokemon.name)
+                        }
+                    }
                 }
-            }
-            .navigationTitle("Pokedex")
+            }.navigationTitle("Pokedex")
+        }.task {
+            await viewModel.loadPokemon()
         }
     }
 }

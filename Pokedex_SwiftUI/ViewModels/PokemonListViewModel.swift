@@ -7,24 +7,33 @@
 
 import SwiftUI
 
+@MainActor
 @Observable
 final class PokemonListViewModel {
-    var pokemon: [Pokemon] = [
-        Pokemon(
-            name: "bulbasaur",
-            url: "https://pokeapi.co/api/v2/pokemon/1/"
-        ),
-        Pokemon(
-            name: "charmander",
-            url: "https://pokeapi.co/api/v2/pokemon/4/"
-        ),
-        Pokemon(
-            name: "squirtle",
-            url: "https://pokeapi.co/api/v2/pokemon/7/"
-        ),
-        Pokemon(
-            name: "pikachu",
-            url: "https://pokeapi.co/api/v2/pokemon/25/"
-        ),
-    ]
+    var pokemon: [Pokemon] = []
+    var isLoading = false
+    var errorMessage: String?
+    
+    private let apiClient: PokemonAPIClient
+    
+    init(apiClient: PokemonAPIClient) {
+        self.apiClient = apiClient
+    }
+    
+    init() {
+        self.apiClient = PokemonAPIClient()
+    }
+    
+    func loadPokemon() async {
+        isLoading = true
+        errorMessage = nil
+        
+        do {
+            pokemon = try await apiClient.fetchPokemonList()
+        } catch {
+            errorMessage = "Failed to load pokemon"
+        }
+        
+        isLoading = false
+    }
 }

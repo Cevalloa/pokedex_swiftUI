@@ -16,7 +16,7 @@ struct PokemonDetailView: View {
                 .font(.largeTitle)
                 .bold()
             
-            Text("Type: \(pokemon.type)")
+            Text("Type: \(pokemon.url)")
                 .font(.title2)
                 .foregroundStyle(.secondary)
         }
@@ -26,5 +26,5 @@ struct PokemonDetailView: View {
 }
 
 #Preview {
-    PokemonDetailView(pokemon: Pokemon(id: 25, name: "Pikachu", type: "Electric"))
+    PokemonDetailView(pokemon: Pokemon(name: "Pikachu", url: "https://pokeapi.co/api/v2/pokemon/25/"))
 }

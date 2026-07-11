@@ -10,9 +10,21 @@ import SwiftUI
 @Observable
 final class PokemonListViewModel {
     var pokemon: [Pokemon] = [
-        Pokemon(id: 1, name: "Bulbasaur", type: "Grass"),
-        Pokemon(id: 4, name: "Charmander", type: "Fire"),
-        Pokemon(id: 7, name: "Squirtle", type: "Water"),
-        Pokemon(id: 25, name: "Pikachu", type: "Electric")
+        Pokemon(
+            name: "bulbasaur",
+            url: "https://pokeapi.co/api/v2/pokemon/1/"
+        ),
+        Pokemon(
+            name: "charmander",
+            url: "https://pokeapi.co/api/v2/pokemon/4/"
+        ),
+        Pokemon(
+            name: "squirtle",
+            url: "https://pokeapi.co/api/v2/pokemon/7/"
+        ),
+        Pokemon(
+            name: "pikachu",
+            url: "https://pokeapi.co/api/v2/pokemon/25/"
+        ),
     ]
 }

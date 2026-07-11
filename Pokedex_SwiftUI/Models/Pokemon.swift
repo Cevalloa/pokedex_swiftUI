@@ -5,8 +5,11 @@
 //  Created by Alex Cevallos on 7/10/26.
 //
 
-struct Pokemon: Identifiable {
-    let id: Int
+struct Pokemon: Identifiable, Decodable {
     let name: String
-    let type: String
+    let url: String
+    
+    var id: String {
+        url
+    }
 }

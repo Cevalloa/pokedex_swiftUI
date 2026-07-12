@@ -23,7 +23,7 @@ struct ContentView: View {
                         NavigationLink {
                             PokemonDetailView(pokemon: pokemon)
                         } label: {
-                            Text(pokemon.name)
+                            PokemonRowView(pokemon: pokemon)
                         }
                     }
                 }

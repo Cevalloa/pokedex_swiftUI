@@ -36,4 +36,18 @@ struct PokemonAPIClient {
         
         return pokemonListResponse.results
     }
+    
+    func fetchPokemonDetail(from urlString: String) async throws -> PokemonDetailResponse {
+        guard let url = URL(string: urlString) else {
+            throw PokemonAPIClientError.invalidURL
+        }
+        
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw PokemonAPIClientError.invalidResponse
+        }
+        
+        return try JSONDecoder().decode(PokemonDetailResponse.self, from: data)
+    }
 }

@@ -39,6 +39,17 @@ struct PokemonDetailView: View {
                 .font(.largeTitle)
                 .bold()
             
+            if let pokemonID = viewModel.pokemonID {
+                Text("#\(pokemonID)")
+                    .font(.title2)
+                    .foregroundStyle(.secondary)
+            }
+            
+            if !viewModel.typeNames.isEmpty {
+                Text(viewModel.typeNames.joined(separator: " / "))
+                    .font(.headline)
+            }
+            
             Text("Type: \(pokemon.url)")
                 .font(.title2)
                 .foregroundStyle(.secondary)

@@ -48,6 +48,10 @@ struct PokemonAPIClient {
             throw PokemonAPIClientError.invalidResponse
         }
         
+        guard (200...299).contains(httpResponse.statusCode) else {
+            throw PokemonAPIClientError.badStatusCode(httpResponse.statusCode)
+        }
+        
         return try JSONDecoder().decode(PokemonDetailResponse.self, from: data)
     }
 }

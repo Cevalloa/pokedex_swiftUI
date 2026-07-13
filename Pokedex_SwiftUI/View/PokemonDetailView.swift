@@ -10,8 +10,31 @@ import SwiftUI
 struct PokemonDetailView: View {
     let pokemon: Pokemon
     
+    @State private var viewModel = PokemonDetailViewModel()
+    
     var body: some View {
         VStack(spacing: 16) {
+            
+            if viewModel.isLoading {
+                ProgressView("loading image")
+            } else if let errorMessage = viewModel.errorMessage {
+                Text(errorMessage)
+                    .foregroundStyle(.red)
+            } else if let imageUrl = viewModel.imageURL {
+                AsyncImage(url: imageUrl) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 200)
+                    
+                } placeholder: {
+                    ProgressView()
+                }
+            } else {
+                Text("No image available")
+                    .foregroundStyle(.secondary)
+            }
+            
             Text(pokemon.name)
                 .font(.largeTitle)
                 .bold()
@@ -20,8 +43,11 @@ struct PokemonDetailView: View {
                 .font(.title2)
                 .foregroundStyle(.secondary)
         }
-        .navigationTitle(pokemon.name)
+        .navigationTitle(pokemon.name.capitalized)
         .navigationBarTitleDisplayMode(.inline)
+        .task {
+            await viewModel.loadDetail(for: pokemon)
+        }
     }
 }
 

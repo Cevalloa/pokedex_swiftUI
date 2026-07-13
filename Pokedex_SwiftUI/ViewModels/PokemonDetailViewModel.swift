@@ -11,6 +11,8 @@ import SwiftUI
 @Observable
 final class PokemonDetailViewModel {
     var imageURL: URL?
+    var pokemonID: Int?
+    var typeNames: [String] = []
     var isLoading = false
     var errorMessage: String?
     
@@ -22,6 +24,13 @@ final class PokemonDetailViewModel {
         
         do {
             let detailResponse = try await apiClient.fetchPokemonDetail(from: pokemon.url)
+            
+            pokemonID = detailResponse.id
+            
+            typeNames = detailResponse.types.sorted {firstTypeSlot, secondTypeSlot in firstTypeSlot.slot < secondTypeSlot.slot}
+                .map { typeSlot in
+                    typeSlot.type.name.capitalized
+                }
             
             if let imageURLString = detailResponse.sprites.frontDefault {
                 imageURL = URL(string: imageURLString)

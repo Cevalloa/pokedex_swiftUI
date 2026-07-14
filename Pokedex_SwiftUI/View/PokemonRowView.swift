@@ -11,15 +11,35 @@ struct PokemonRowView: View {
     let pokemon: Pokemon
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(pokemon.name.capitalized)
-                .font(.headline)
+        
+        HStack(spacing: 12) {
+            if let spriteURL = pokemon.spriteURL {
+                AsyncImage(url: spriteURL) {image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 56, height: 56)
+                } placeholder: {
+                    ProgressView()
+                        .frame(width: 56, height: 56)
+                }
+            } else {
+                Image(systemName:"questionmark.circle")
+                    .frame(width:56, height:56)
+                    .foregroundStyle(.secondary)
+            }
+            
+            VStack(alignment: .leading, spacing: 4) {
+                Text(pokemon.name.capitalized)
+                    .font(.headline)
 
-            Text(pokemon.url)
-                .font(.caption)
-                .foregroundStyle(.secondary)
+                Text(pokemon.url)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            .padding(.vertical, 4)
         }
-        .padding(4)
+       
     }
 }
 

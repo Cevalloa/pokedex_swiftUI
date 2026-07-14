@@ -14,9 +14,9 @@ final class PokemonListViewModel {
     var isLoading = false
     var errorMessage: String?
     
-    private let apiClient: PokemonAPIClient
+    private let apiClient: any PokemonAPIClientProtocol
     
-    init(apiClient: PokemonAPIClient) {
+    init(apiClient: any PokemonAPIClientProtocol) {
         self.apiClient = apiClient
     }
     

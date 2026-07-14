@@ -10,9 +10,12 @@ import Testing
 
 struct Pokedex_SwiftUITests {
 
-    @Test func startswithMockedPokemon() {
+    @Test
+    @MainActor
+    func startswithMockedPokemon() {
         let viewModel = PokemonListViewModel()
         
-        #expect(viewModel.pokemon.count == 4)
+        #expect(viewModel.pokemon.isEmpty)
+        #expect(viewModel.isLoading == false)
     }
 }

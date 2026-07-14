@@ -13,7 +13,7 @@ enum PokemonAPIClientError: Error {
     case badStatusCode(Int)
 }
 
-struct PokemonAPIClient {
+struct PokemonAPIClient: PokemonAPIClientProtocol {
     func fetchPokemonList() async throws -> [Pokemon] {
         guard let url = URL(string: "https://pokeapi.co/api/v2/pokemon?limit=20") else {
             throw PokemonAPIClientError.invalidURL

@@ -19,7 +19,7 @@ struct ContentView: View {
                     Text(errorMessage)
                         .foregroundStyle(.red)
                 } else {
-                    List(viewModel.pokemon) { pokemon in
+                    List(viewModel.filteredPokemon) { pokemon in
                         NavigationLink {
                             PokemonDetailView(pokemon: pokemon)
                         } label: {
@@ -28,6 +28,7 @@ struct ContentView: View {
                     }
                 }
             }.navigationTitle("Pokedex")
+                .searchable(text: $viewModel.searchText, prompt: "Search Pokemon")
         }.task {
             await viewModel.loadPokemon()
         }

@@ -13,6 +13,7 @@ final class PokemonListViewModel {
     var pokemon: [Pokemon] = []
     var isLoading = false
     var errorMessage: String?
+    var searchText = ""
     
     private let apiClient: any PokemonAPIClientProtocol
     
@@ -22,6 +23,16 @@ final class PokemonListViewModel {
     
     init() {
         self.apiClient = PokemonAPIClient()
+    }
+    
+    var filteredPokemon: [Pokemon] {
+        if searchText.isEmpty {
+            return pokemon
+        }
+        
+        return pokemon.filter { pokemon in
+            pokemon.name.localizedCaseInsensitiveContains(searchText)
+        }
     }
     
     func loadPokemon() async {

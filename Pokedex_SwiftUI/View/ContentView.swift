@@ -19,13 +19,36 @@ struct ContentView: View {
                     Text(errorMessage)
                         .foregroundStyle(.red)
                 } else {
-                    List(viewModel.filteredPokemon) { pokemon in
-                        NavigationLink {
-                            PokemonDetailView(pokemon: pokemon)
-                        } label: {
-                            PokemonRowView(pokemon: pokemon)
+                    
+                    List {
+                        ForEach(viewModel.filteredPokemon) { pokemon in
+                            NavigationLink {
+                                PokemonDetailView(pokemon: pokemon)
+                            } label: {
+                                PokemonRowView(pokemon: pokemon)
+                            }
+                            
+                            .task {
+                                await viewModel.loadMorePokemonIfNeeded(currentPokemon: pokemon)
+                            }
+                        }
+                        
+                        if viewModel.isLoadingMore {
+                            HStack {
+                                Spacer()
+                                ProgressView()
+                                Spacer()
+                            }
                         }
                     }
+                    
+//                    List(viewModel.filteredPokemon) { pokemon in
+//                        NavigationLink {
+//                            PokemonDetailView(pokemon: pokemon)
+//                        } label: {
+//                            PokemonRowView(pokemon: pokemon)
+//                        }
+//                    }
                 }
             }.navigationTitle("Pokedex")
                 .searchable(text: $viewModel.searchText, prompt: "Search Pokemon")

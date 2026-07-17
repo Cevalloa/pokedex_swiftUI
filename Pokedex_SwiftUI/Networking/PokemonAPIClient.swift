@@ -15,7 +15,7 @@ enum PokemonAPIClientError: Error {
 
 struct PokemonAPIClient: PokemonAPIClientProtocol {
     func fetchPokemonList(limit: Int, offset: Int) async throws -> PokemonListResponse {
-        guard let url = URL(string: "https://pokeapi.co/api/v2/pokemon?limit=20") else {
+        guard let url = URL(string: "https://pokeapi.co/api/v2/pokemon?limit=\(limit)&offset=\(offset)") else {
             throw PokemonAPIClientError.invalidURL
         }
         

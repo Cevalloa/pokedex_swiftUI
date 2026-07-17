@@ -42,6 +42,7 @@ struct ContentView: View {
                         }
                     }
                     
+                    // Use this for finite scrolling
 //                    List(viewModel.filteredPokemon) { pokemon in
 //                        NavigationLink {
 //                            PokemonDetailView(pokemon: pokemon)

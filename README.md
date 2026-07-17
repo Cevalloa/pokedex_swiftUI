@@ -55,5 +55,5 @@ Pokedex_SwiftUI
 └── Tests
 ```
 ## Screenshots
-<img width="1206" height="2622" alt="Simulator Screenshot - iPhone 17 Pro - 2026-07-17 at 11 54 24" src="https://github.com/user-attachments/assets/3ea52ce8-b08f-4af6-a4fc-117392c47978" />
+<img width="301" height="661" alt="Simulator Screenshot - iPhone 17 Pro - 2026-07-17 at 11 54 24" src="https://github.com/user-attachments/assets/3ea52ce8-b08f-4af6-a4fc-117392c47978" />
 

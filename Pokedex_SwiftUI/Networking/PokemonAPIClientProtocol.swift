@@ -6,6 +6,6 @@
 //
 
 protocol PokemonAPIClientProtocol {
-    func fetchPokemonList() async throws -> [Pokemon]
+    func fetchPokemonList(limit: Int, offset: Int) async throws -> PokemonListResponse
     func fetchPokemonDetail(from urlString: String) async throws -> PokemonDetailResponse
 }
